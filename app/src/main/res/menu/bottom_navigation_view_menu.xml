@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <item
+        android:id="@+id/bottom_navigation_item_home"
+        android:icon="@drawable/round_home_24"
+        android:title="@string/activity_main_bottom_screen_home" />
+
+    <item
+        android:id="@+id/bottom_navigation_item_map"
+        android:icon="@drawable/round_map_24"
+        android:title="@string/activity_main_bottom_screen_map" />
+
+    <item
+        android:id="@+id/bottom_navigation_item_profile"
+        android:icon="@drawable/round_person_24"
+        android:title="@string/activity_main_bottom_screen_profile"/>
+
+</menu>
