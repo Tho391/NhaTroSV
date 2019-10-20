@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/Key_google_map"/>
+            android:value="@string/NhaTroSV_Google_Map_Api_Key" />
         <activity android:name=".Views.Activity.LoginActivity" android:theme="@style/NoActionBar">
 
         </activity>
