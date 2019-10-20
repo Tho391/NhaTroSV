@@ -155,3 +155,6 @@ Backup of *.docz*
 
 # Visio autosave temporary files
 *.~vsd*
+
+#bỏ qua file api :))
+app/src/main/res/values/api_key.xml

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Nhà Trọ Sinh Viên</string>
+    <string name="nhaTroSinhVien">Nhà Trọ Sinh Viên</string>
+    <string name="activity_main_bottom_screen_home">Home</string>
+    <string name="activity_main_bottom_screen_map">Map</string>
+    <string name="activity_main_bottom_screen_profile">Profile</string>
+</resources>
