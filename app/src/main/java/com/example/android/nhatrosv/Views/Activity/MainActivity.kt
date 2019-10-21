@@ -9,6 +9,8 @@ import com.example.android.nhatrosv.Views.Adapter.MainPagerAdapter
 import com.example.android.nhatrosv.Models.MainScreen
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.Models.getMainScreenForMenuItem
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -16,9 +18,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var mainPagerAdapter: MainPagerAdapter
 
+
+    lateinit var fusedLocationClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Create location services client
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         // Initialize components/views.
         viewPager = findViewById(R.id.view_pager);

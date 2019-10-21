@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.nhatrosv">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.example.permission.MAPS_RECEIVE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.example.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -19,19 +20,19 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/NhaTroSV_Google_Map_Api_Key" />
-        <activity android:name=".Views.Activity.LoginActivity" android:theme="@style/NoActionBar">
 
-        </activity>
-        <activity android:name=".Views.Activity.MainActivity" >
+        <activity
+            android:name=".Views.Activity.LoginActivity"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.Fragment.MapFragment" android:theme="@style/NoActionBar">
-
-        </activity>
+        <activity android:name=".Views.Activity.MainActivity"></activity>
+        <activity
+            android:name=".Views.Fragment.MapFragment"
+            android:theme="@style/NoActionBar"></activity>
     </application>
 
 </manifest>
