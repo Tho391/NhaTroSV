@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.android.nhatrosv.Models.MainScreen
 
 
+@Suppress("DEPRECATION")
 class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val screens = arrayListOf<MainScreen>()

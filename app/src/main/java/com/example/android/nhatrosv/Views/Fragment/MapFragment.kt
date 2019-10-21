@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.android.nhatrosv.R
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -40,8 +41,9 @@ class MapFragment : Fragment() {
         mapView.getMapAsync(OnMapReadyCallback {
             mMap = it
             val hcmute = LatLng(-34.0, 151.0)
+            //val user_location = LocationServices.getFusedLocationProviderClient()
             mMap.addMarker(MarkerOptions().title("hcmute nè").position(hcmute))
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(hcmute))
+            //mMap.moveCamera(CameraUpdateFactory.newLatLng(hcmute))
             mMap.isMyLocationEnabled =true
             mMap.uiSettings.isMyLocationButtonEnabled = true
         })
