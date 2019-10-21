@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.android.nhatrosv.R
 
-public class HomeFragment: Fragment(){
+class HomeFragment: Fragment(){
 
     companion object{
         fun newInstance(): HomeFragment {
