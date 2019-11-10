@@ -16,23 +16,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".views.Activity.ApartmentDetailActivity"></activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/NhaTroSV_Google_Map_Api_Key" />
 
         <activity
-            android:name=".Views.Activity.LoginActivity"
-            android:theme="@style/NoActionBar">
+            android:name=".views.Activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.Activity.MainActivity"></activity>
         <activity
-            android:name=".Views.Fragment.MapFragment"
-            android:theme="@style/NoActionBar"></activity>
+            android:name=".views.Activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.Fragment.MapFragment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

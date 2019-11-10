@@ -1,9 +1,4 @@
-package com.example.android.nhatrosv.Models
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+package com.example.android.nhatrosv.models
 
 
-class Comment() {
-    private lateinit var id: String
-}
+data class Comment(var id: String)

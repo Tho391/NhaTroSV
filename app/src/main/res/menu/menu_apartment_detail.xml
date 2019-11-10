@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <item
+        android:id="@+id/action_call"
+        android:icon="@drawable/round_call_24"
+        android:title="@string/activity_main_bottom_call"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_direction"
+        android:icon="@drawable/round_directions_24"
+        android:title="@string/activity_main_bottom_direction"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/round_share_24"
+        android:title="@string/activity_main_bottom_share"
+        app:showAsAction="ifRoom" />
 
 </menu>

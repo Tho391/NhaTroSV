@@ -1,18 +1,18 @@
-package com.example.android.nhatrosv.Models
+package com.example.android.nhatrosv.models
 
-import androidx.lifecycle.ViewModel
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.graphics.Bitmap
+import java.util.*
 
-class Apartment : ViewModel() {
-    private lateinit var id: String
-    private var name: String = ""
-    private var phoneNumber: String = ""
-    private var price: Int = 0
-    private var state: Boolean = false
-    private var description: String = ""
-    private var Comment: List<Comment>? = null
-    private var address: String? = null
-    private var listImage: List<String>? = null
-    private lateinit var coordinate: Coordinate
-}
+data class Apartment(
+    var id: String,
+    var name: String,
+    var date: String,
+    var phoneNumber: String,
+    var price: Int,
+    var state: Boolean,
+    var description: String,
+    var Comment: List<Comment>?,
+    var address: String?,
+    var listImage: List<Bitmap>?,
+    var coordinate: Coordinate
+)

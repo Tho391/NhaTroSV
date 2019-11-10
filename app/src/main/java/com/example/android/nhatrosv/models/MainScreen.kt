@@ -1,13 +1,13 @@
-package com.example.android.nhatrosv.Models
+package com.example.android.nhatrosv.models
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.example.android.nhatrosv.R
-import com.example.android.nhatrosv.Views.Fragment.HomeFragment
-import com.example.android.nhatrosv.Views.Fragment.MapFragment
-import com.example.android.nhatrosv.Views.Fragment.ProfileFragment
+import com.example.android.nhatrosv.views.Fragment.HomeFragment
+import com.example.android.nhatrosv.views.Fragment.MapFragment
+import com.example.android.nhatrosv.views.Fragment.ProfileFragment
 
 /**
  * Screens available for display in the main screen, with their respective titles,

@@ -1,9 +1,9 @@
-package com.example.android.nhatrosv.Views.Adapter
+package com.example.android.nhatrosv.views.Adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.android.nhatrosv.Models.MainScreen
+import com.example.android.nhatrosv.models.MainScreen
 
 
 @Suppress("DEPRECATION")

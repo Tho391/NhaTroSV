@@ -1,14 +1,14 @@
-package com.example.android.nhatrosv.Views.Activity
+package com.example.android.nhatrosv.views.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.IdRes
 import androidx.viewpager.widget.ViewPager
-import com.example.android.nhatrosv.Views.Adapter.MainPagerAdapter
-import com.example.android.nhatrosv.Models.MainScreen
+import com.example.android.nhatrosv.views.Adapter.MainPagerAdapter
+import com.example.android.nhatrosv.models.MainScreen
 import com.example.android.nhatrosv.R
-import com.example.android.nhatrosv.Models.getMainScreenForMenuItem
+import com.example.android.nhatrosv.models.getMainScreenForMenuItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,27 +19,34 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var mainPagerAdapter: MainPagerAdapter
 
 
-    lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize the places SDK
+        //Places.initialize(baseContext, "@string/NhaTroSV_Google_Map_Api_Key")
+        // Create a new Places client instance
+        //placesClient = Places.createClient(baseContext)
+
         //Create location services client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         // Initialize components/views.
-        viewPager = findViewById(R.id.view_pager);
-        bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        viewPager = findViewById(R.id.view_pager)
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         mainPagerAdapter =
             MainPagerAdapter(supportFragmentManager)
 
         // Set items to be displayed.
-        mainPagerAdapter.setItems(arrayListOf(
-            MainScreen.HOME,
-            MainScreen.MAP,
-            MainScreen.PROFILE
-        ))
+        mainPagerAdapter.setItems(
+            arrayListOf(
+                MainScreen.HOME,
+                MainScreen.MAP,
+                MainScreen.PROFILE
+            )
+        )
 
         // Show the default screen.
         val defaultScreen = MainScreen.HOME

@@ -1,4 +1,4 @@
-package com.example.android.nhatrosv.views.Activity
+package com.example.android.nhatrosv.views
 
 import android.app.Activity
 import android.content.Context
@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 //Extension for activity
-inline fun <reified T : Any> Activity.lauchActivity(
+inline fun <reified T : Any> Activity.launchActivity(
     requestCode: Int = -1,
     options: Bundle? = null,
     noinline init: Intent.() -> Unit = {}
@@ -96,6 +96,21 @@ fun Fragment.TOAST(message: String, duration: Int = Toast.LENGTH_SHORT) {
 fun Fragment.TOAST(messageResId: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, messageResId, duration).show()
 }
+
+/**
+ * Extension method used to display a [Toast] message to the user.
+ */
+fun Activity.TOAST(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
+}
+
+/**
+ * Extension method used to display a [Toast] message to the user.
+ */
+fun Activity.TOAST(messageResId: Int, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, messageResId, duration).show()
+}
+
 
 /**
  * Extension method use to display a [Snackbar] message to the user.

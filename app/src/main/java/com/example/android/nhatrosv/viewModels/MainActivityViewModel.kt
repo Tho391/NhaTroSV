@@ -1,2 +1,2 @@
-package com.example.android.nhatrosv.ViewModels
+package com.example.android.nhatrosv.viewModels
 

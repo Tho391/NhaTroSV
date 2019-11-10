@@ -1,4 +1,4 @@
-package com.example.android.nhatrosv.Views.Activity
+package com.example.android.nhatrosv.views.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.example.android.nhatrosv.R
+import com.example.android.nhatrosv.views.launchActivity
 import com.google.android.gms.common.SignInButton
 
 
@@ -28,9 +29,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        when (p0?.id){
-            R.id.sign_in_button ->{
-                lauchActivity<MainActivity> {  }
+        when (p0?.id) {
+            R.id.sign_in_button -> {
+                //launchActivity<MainActivity> {  }
+                //launchActivity<MainActivity> {  }
+                launchActivity<MainActivity> { }
+//                val intent = Intent(this,MainActivity::class.java)
+//                startActivity(intent)
             }
         }
     }

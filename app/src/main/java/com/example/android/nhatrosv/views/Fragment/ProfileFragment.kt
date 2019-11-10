@@ -1,14 +1,11 @@
-package com.example.android.nhatrosv.Views.Fragment
+package com.example.android.nhatrosv.views.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.android.nhatrosv.R
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
@@ -26,11 +23,6 @@ class ProfileFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_profile,container,false)
         //return super.onCreateView(inflater, container, savedInstanceState)
         return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
 }

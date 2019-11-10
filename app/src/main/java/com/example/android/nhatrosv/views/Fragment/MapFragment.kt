@@ -1,28 +1,30 @@
-package com.example.android.nhatrosv.Views.Fragment
+package com.example.android.nhatrosv.views.Fragment
 
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.example.android.nhatrosv.R
-import com.example.android.nhatrosv.Views.Activity.TOAST
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.*
+import com.example.android.nhatrosv.views.TOAST
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.fragment_map.view.*
 
 
 class MapFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener {
 
-
     private lateinit var mMap: GoogleMap
     lateinit var mapView: MapView
+    private lateinit var searchView: SearchView
 
 //    companion object {
 //        fun newInstance(): MapFragment {
@@ -49,14 +51,47 @@ class MapFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
             mMap.addMarker(MarkerOptions().title("hcmute nè").position(hcmute))
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(hcmute))
             mMap.isMyLocationEnabled = true
-
-            mMap.uiSettings.isMyLocationButtonEnabled = true
-            mMap.uiSettings.isMapToolbarEnabled = false
+            //mMap.uiSettings.isMyLocationButtonEnabled = true
+            mMap.uiSettings.isMapToolbarEnabled = true
+            //mMap.setPadding(0,100,0,0)
 
             mMap.setOnMyLocationButtonClickListener(this)
             mMap.setOnMyLocationClickListener(this)
-
         })
+
+        // Get the button view
+        val locationButton =
+            (mapView.findViewById<View>(Integer.parseInt("1")).parent as View)
+                .findViewById<View>(Integer.parseInt("2"))
+        // and next place it, for exemple, on bottom right (as Google Maps app)
+        val rlp = locationButton.layoutParams as RelativeLayout.LayoutParams
+        // position on right bottom
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE)
+        rlp.bottomMargin = 33
+        val mapToolbar = (mapView.findViewById<View>(Integer.parseInt("1")).parent as View)
+            .findViewById<View>(Integer.parseInt("4"))
+        val rlp2 = mapToolbar.layoutParams as RelativeLayout.LayoutParams
+        // position on right bottom
+        rlp2.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+        rlp2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+        rlp2.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE)
+        rlp2.rightMargin = 150
+        rlp2.bottomMargin = 30
+
+        val googleText = (mapView.findViewById<View>(Integer.parseInt("1")).parent as View)
+            .findViewById<View>(Integer.parseInt("4"))
+        val rlp3 = googleText.layoutParams as RelativeLayout.LayoutParams
+        // position on right bottom
+        rlp3.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+        rlp3.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+        rlp3.addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE)
+
+
+        searchView = rootView.findViewById(R.id.searchView)
+
+
         return rootView
     }
 
