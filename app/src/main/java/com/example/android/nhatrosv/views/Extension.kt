@@ -1,4 +1,4 @@
-package com.example.android.nhatrosv.Views.Activity
+package com.example.android.nhatrosv.views.Activity
 
 import android.app.Activity
 import android.content.Context
@@ -8,10 +8,13 @@ import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
@@ -152,3 +155,8 @@ fun Activity.isKeyboardVisible(): Boolean {
  * Retrieve a decoded bitmap from resources, or null if the image could not be decoded.
  */
 fun Context.decodeBitmap(resId: Int): Bitmap? = BitmapFactory.decodeResource(resources, resId)
+
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}
+
