@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="district">
+        <item>@string/tatca</item>
+        <item>@string/quan1</item>
+        <item>@string/quan2</item>
+        <item>@string/quan3</item>
+        <item>@string/quan4</item>
+        <item>@string/quan5</item>
+        <item>@string/quan6</item>
+        <item>@string/quan7</item>
+        <item>@string/quan8</item>
+        <item>@string/quan9</item>
+        <item>@string/quan10</item>
+        <item>@string/quan11</item>
+        <item>@string/quan12</item>
+        <item>@string/quanbinhtan</item>
+        <item>@string/quanbinhthanh</item>
+        <item>@string/quangovap</item>
+        <item>@string/quanphunhuan</item>
+        <item>@string/quantanbinh</item>
+        <item>@string/quantanphu</item>
+        <item>@string/quanthuduc</item>
+    </string-array>
+
+    <string name="tatca">Tất cả</string>
+    <string name="quan1">Quận 1</string>
+    <string name="quan2">Quận 2</string>
+    <string name="quan3">Quận 3</string>
+    <string name="quan4">Quận 4</string>
+    <string name="quan5">Quận 5</string>
+    <string name="quan6">Quận 6</string>
+    <string name="quan7">Quận 7</string>
+    <string name="quan8">Quận 8</string>
+    <string name="quan9">Quận 9</string>
+    <string name="quan10">Quận 10</string>
+    <string name="quan11">Quận 11</string>
+    <string name="quan12">Quận 12</string>
+    <string name="quanbinhtan">Quận Bình Tân</string>
+    <string name="quanbinhthanh">Quận Bình Thạnh</string>
+    <string name="quangovap">Quận Gò Vấp</string>
+    <string name="quanphunhuan">Quận Phú Nhuận</string>
+    <string name="quantanbinh">Quận Tân Bình</string>
+    <string name="quantanphu">Quận Tân Phú</string>
+    <string name="quanthuduc">Quận Thủ Đức</string>
+</resources>

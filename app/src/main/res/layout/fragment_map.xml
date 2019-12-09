@@ -28,4 +28,14 @@
 
     </androidx.appcompat.widget.SearchView>
 
+    <ImageView
+        android:id="@+id/imageView_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
+        app:srcCompat="@drawable/round_directions_black_24" />
+
 </RelativeLayout>

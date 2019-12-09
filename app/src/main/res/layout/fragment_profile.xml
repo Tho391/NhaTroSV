@@ -7,22 +7,24 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/icon_home"
+        android:id="@+id/imageView_profile"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="30dp"
+        android:scaleType="centerCrop"
         android:background="@drawable/circle"
         app:srcCompat="@drawable/round_person_black_48" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_name"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
-        android:text="Nguyễn Quang Thọ" />
+        android:textSize="36sp"
+        android:text="Tên" />
 
     <LinearLayout
         android:id="@+id/linear2"
@@ -75,7 +77,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linear4"
+        android:id="@+id/linear_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

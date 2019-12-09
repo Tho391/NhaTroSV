@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.Activity.LoginActivity">
+    tools:context=".views.activity.LoginActivity">
 
     <ImageView
         android:id="@+id/icon_home"

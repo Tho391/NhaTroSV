@@ -1,10 +1,11 @@
 package com.example.android.nhatrosv.models
 
+import java.io.Serializable
 
-class User {
-    private lateinit var id: String
-    private lateinit var name: String
-    private lateinit var phoneNumber: String
-    private lateinit var userName: String
-    private lateinit var password: String
-}
+data class User(
+    var id: String?,
+    var name: String?,
+    var email: String?,
+    var phoneNumber: String?,
+    var photoUrl: String?
+) : Serializable

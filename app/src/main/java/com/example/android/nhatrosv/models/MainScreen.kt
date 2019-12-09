@@ -5,9 +5,9 @@ import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.example.android.nhatrosv.R
-import com.example.android.nhatrosv.views.Fragment.HomeFragment
-import com.example.android.nhatrosv.views.Fragment.MapFragment
-import com.example.android.nhatrosv.views.Fragment.ProfileFragment
+import com.example.android.nhatrosv.views.fragment.HomeFragment
+import com.example.android.nhatrosv.views.fragment.MapFragment
+import com.example.android.nhatrosv.views.fragment.ProfileFragment
 
 /**
  * Screens available for display in the main screen, with their respective titles,

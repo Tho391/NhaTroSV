@@ -20,6 +20,12 @@
         android:id="@+id/action_share"
         android:icon="@drawable/round_share_24"
         android:title="@string/activity_main_bottom_share"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/round_refresh_black_24"
+        android:title="Refresh"
         app:showAsAction="ifRoom" />
 
 </menu>

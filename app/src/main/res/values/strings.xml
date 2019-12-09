@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Nhà Trọ Sinh Viên</string>
     <string name="nhaTroSinhVien">Nhà Trọ Sinh Viên</string>
-    <string name="activity_main_bottom_screen_home">Home</string>
-    <string name="activity_main_bottom_screen_map">Map</string>
-    <string name="activity_main_bottom_screen_profile">Profile</string>
-    <string name="activity_main_bottom_call">Call</string>
-    <string name="activity_main_bottom_direction">Direction</string>
-    <string name="activity_main_bottom_share">Share</string>
+    <string name="activity_main_bottom_screen_home">Trang chủ</string>
+    <string name="activity_main_bottom_screen_map">Bản đồ</string>
+    <string name="activity_main_bottom_screen_profile">Cá nhân</string>
+    <string name="activity_main_bottom_call">Gọi</string>
+    <string name="activity_main_bottom_direction">Chỉ đường</string>
+    <string name="activity_main_bottom_share">Chia sẻ</string>
+    <string name="dien_tich_phong">Diện tích phòng (m\u00B2)</string>
+
+
+
 </resources>
