@@ -12,6 +12,7 @@
 
     <item
         android:id="@+id/action_direction"
+        android:visible="false"
         android:icon="@drawable/round_directions_24"
         android:title="@string/activity_main_bottom_direction"
         app:showAsAction="ifRoom" />

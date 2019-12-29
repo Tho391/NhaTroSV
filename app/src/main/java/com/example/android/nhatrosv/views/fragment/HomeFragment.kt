@@ -2,6 +2,7 @@ package com.example.android.nhatrosv.views.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -16,12 +17,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.models.Apartment
+import com.example.android.nhatrosv.models.Token
+import com.example.android.nhatrosv.utils.get
 import com.example.android.nhatrosv.utils.getViewModel
 import com.example.android.nhatrosv.viewModels.MainActivityViewModel
+import com.example.android.nhatrosv.views.activity.OnDataReceivedListener
 import com.example.android.nhatrosv.views.adapter.ApartmentAdapter
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnDataReceivedListener {
+
     private val RC_CANCEL: Int = 1001
     private val RC_HOME: Int = 1000
     lateinit var toolbar: Toolbar
@@ -30,6 +35,9 @@ class HomeFragment : Fragment() {
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
     lateinit var viewModel: MainActivityViewModel
     var mApartments: List<Apartment> = ArrayList()
+
+    lateinit var sharedPreferences : SharedPreferences
+    lateinit var token: Token
 
     lateinit var mSearch: MenuItem
     lateinit var mSearchView: SearchView
@@ -45,10 +53,12 @@ class HomeFragment : Fragment() {
         if (activity is AppCompatActivity)
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
+        sharedPreferences = requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        token= Token(sharedPreferences.get("token","null"))
         viewModel = getViewModel<MainActivityViewModel>()
         recyclerView = rootView.findViewById(R.id.recycler_view)
 
-        mApartmentAdapter = ApartmentAdapter(ArrayList())
+        mApartmentAdapter = ApartmentAdapter(requireContext(),ArrayList())
         recyclerView.adapter = mApartmentAdapter
 
         val linearLayoutManager =
@@ -56,19 +66,19 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
 
         //loadApartments()
-        loadApartment()
+        loadApartment(token.getToken())
 
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
-            loadApartment()
+            loadApartment(token.getToken())
         }
 
         return rootView
     }
 
     // GET List of apartment
-    private fun loadApartment() {
-        viewModel.getApartments().observe(this,
+    private fun loadApartment(token: String) {
+        viewModel.getApartments(token).observe(this,
             Observer { response ->
                 mApartments = response
                 mApartmentAdapter.updateApartments(mApartments)
@@ -124,7 +134,7 @@ class HomeFragment : Fragment() {
             }
             R.id.action_refresh ->{
                 swipeRefreshLayout.isRefreshing = true
-                loadApartment()
+                loadApartment(token.getToken())
                 true
             }
 
@@ -149,6 +159,10 @@ class HomeFragment : Fragment() {
                 mApartmentAdapter.filter.filter(mSearchView.query)
             }
         }
+    }
+
+    override fun onDataReceived(apartmentId: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
 

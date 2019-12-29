@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".views.activity.RegisterActivity"></activity>
         <activity android:name=".views.activity.ProfileActivity" />
         <activity android:name=".views.activity.ListImageActivity" />
         <activity
@@ -26,6 +27,9 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/NhaTroSV_Google_Map_Api_Key" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ADMOD_APP_ID" />
 
         <activity
             android:name=".views.activity.LoginActivity"

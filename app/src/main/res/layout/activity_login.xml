@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/icon_home"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         app:srcCompat="@mipmap/house" />
 
     <TextView
@@ -23,17 +23,87 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="@string/nhaTroSinhVien" />
+        android:layout_marginTop="30dp"
+        android:text="@string/nhaTroSinhVien"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/button_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:buttonSize="wide">
+
+    </com.google.android.gms.common.SignInButton>
+
+    <EditText
+        android:id="@+id/editText_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/icon_home"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        app:buttonSize="wide" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="Tài khoản"
+        android:inputType="textPersonName"
+        android:padding="15dp" />
+
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:ems="10"
+        android:maxLines="5"
+        android:text="Token"
+        android:textIsSelectable="true"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/editText_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_username"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword"
+        android:padding="15dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_login"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="182dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/editText_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="ĐĂNG NHẬP"
+        android:textColor="@color/quantum_black_100"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        style="@style/TextStyle"
+        android:text="@string/register" />
 
 
 </RelativeLayout>

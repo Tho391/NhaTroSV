@@ -14,9 +14,9 @@ data class Apartment(
     @SerializedName("Sdt")
     @Expose
     val phoneNumber: String?,
-    @SerializedName("TenDuong")
+    @SerializedName("DiaChi")
     @Expose
-    val street: String?,
+    val address: String?,
     @SerializedName("TenQuan")
     @Expose
     val district: String?,
@@ -32,7 +32,7 @@ data class Apartment(
     @SerializedName("date")
     @Expose
     val date: String?,
-    @SerializedName("ImageHinh")
+    @SerializedName("Img")
     @Expose
     val imageURl: String?,
     @SerializedName("localX")
@@ -40,13 +40,18 @@ data class Apartment(
     val localX: Double?,
     @SerializedName("localY")
     @Expose
-    val localY: Double?
+    val localY: Double?,
+    @SerializedName("chitiet")
+    @Expose
+    val details: String?,
+    @SerializedName("state")
+    @Expose
+    val state: Any?
 
 ) : Serializable {
 
     fun getInfo(): String {
-        var result =""
-        result = "Giá: $price\n Diện tích: $area"
-        return result
+        //return "Giá: $price\nDiện tích: $area m\u00B2\nSố điện thoại: $phoneNumber"
+        return "Giá: $price\nDiện tích: $area m\u00B2"
     }
 }

@@ -11,13 +11,15 @@
         android:layout_height="match_parent" />
 
 
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-
+        android:paddingEnd="35dp"
+        android:paddingStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_rect"
         android:contextClickable="false"
@@ -32,10 +34,51 @@
         android:id="@+id/imageView_direction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/imageView_location"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_blur"
+        android:elevation="1dp"
+        android:visibility="invisible"
         app:srcCompat="@drawable/round_directions_black_24" />
+
+    <ImageView
+        android:elevation="1dp"
+        android:id="@+id/imageView_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_blur"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:srcCompat="@drawable/round_my_location_black_24" />
+
+    <ImageView
+        android:id="@+id/imageView_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView_direction"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_blur"
+        android:elevation="1dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/round_call_black_24" />
+
+    <ImageView
+        android:id="@+id/imageView_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:elevation="10dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/background_blur"
+        app:srcCompat="@drawable/ic_filter_list_black_24dp" />
 
 </RelativeLayout>

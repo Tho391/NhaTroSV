@@ -1,30 +1,39 @@
 package com.example.android.nhatrosv.views.activity
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.models.MainScreen
+import com.example.android.nhatrosv.models.Token
 import com.example.android.nhatrosv.models.getMainScreenForMenuItem
-import com.example.android.nhatrosv.viewModels.MainActivityViewModel
+import com.example.android.nhatrosv.utils.get
 import com.example.android.nhatrosv.views.adapter.MainPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,OnDataReceivedListener {
     private lateinit var viewPager: ViewPager
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var mainPagerAdapter: MainPagerAdapter
 
-    private lateinit var mainActivityViewModel: MainActivityViewModel
+    lateinit var mDataReceivedListener: OnDataReceivedListener
+
+    private lateinit var sharedPreferences: SharedPreferences
+    lateinit var token: Token
+    override fun onDataReceived(apartmentId: Int) {
+        mainPagerAdapter.onDataReceived(apartmentId)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        token= Token(sharedPreferences.get("token","null"))
         // Initialize components/views.
         viewPager = findViewById(R.id.view_pager)
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
@@ -43,6 +52,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         // Show the default screen.
         val defaultScreen = MainScreen.HOME
         scrollToScreen(defaultScreen)
+        // show map if have viewpager position from adapter
+//        val extras = intent.extras
+//        if (extras != null)
+//            viewpager_position = extras.getInt("viewpager_position")
+
         selectBottomNavigationViewMenuItem(defaultScreen.menuItemId)
         supportActionBar?.setTitle(defaultScreen.titleStringId)
 
@@ -59,21 +73,28 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 supportActionBar?.setTitle(selectedScreen.titleStringId)
             }
         })
+        //viewPager.offscreenPageLimit = 2
+        //go to map page if has id from apartment detail
+        val mode = intent.getIntExtra("mode",0)
+        val apartmentId = intent.getIntExtra("id",-1)
+        if (mode == 1 && apartmentId != -1)
+            scrollToScreen(MainScreen.MAP,apartmentId)
 
-        //init view model
-        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-//        mainActivityViewModel.getApartments().observe(this,
-//            Observer<ApartmentResponse> { response: ApartmentResponse ->
-//                //val apartments: List<Apartment> = response
-//                //apartmentList.addAll(apartments)
-//            }
-//        )
+
     }
+
 
     /**
      * Scrolls ViewPager to show the provided screen.
      */
     private fun scrollToScreen(mainScreen: MainScreen) {
+        val screenPosition = mainPagerAdapter.getItems().indexOf(mainScreen)
+        if (screenPosition != viewPager.currentItem) {
+            viewPager.currentItem = screenPosition
+        }
+    }
+    fun scrollToScreen(mainScreen: MainScreen,apartmentId: Int){
+        mDataReceivedListener.onDataReceived(apartmentId)
         val screenPosition = mainPagerAdapter.getItems().indexOf(mainScreen)
         if (screenPosition != viewPager.currentItem) {
             viewPager.currentItem = screenPosition
@@ -100,6 +121,5 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
-
 }
 

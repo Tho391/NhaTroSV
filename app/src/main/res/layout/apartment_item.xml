@@ -113,13 +113,16 @@
         <TextView
             android:id="@+id/textView_Address"
             style="@style/TextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Quận 9"
+            android:layout_marginEnd="8dp"
+            android:maxLines="2"
+            android:text="@string/test"
             android:textColor="@color/colorAddress"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView3"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -135,7 +138,7 @@
             android:textColor="@color/colorPrimaryText"
             app:cornerRadius="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_Address" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_map"
@@ -148,7 +151,7 @@
             android:textColor="@color/colorPrimaryText"
             app:cornerRadius="10dp"
             app:layout_constraintStart_toEndOf="@+id/button_detail"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_Address" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

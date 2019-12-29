@@ -7,5 +7,7 @@ data class User(
     var name: String?,
     var email: String?,
     var phoneNumber: String?,
-    var photoUrl: String?
+    var photoUrl: String?,
+    var username: String?,
+    val password: String?
 ) : Serializable

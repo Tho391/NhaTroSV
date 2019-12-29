@@ -8,10 +8,10 @@ data class Comment(
     @SerializedName("IdNguoiDung")
     @Expose
     val id: Int?,
-    @SerializedName("Ho")
+    @SerializedName("Ten")
     @Expose
     val firstName: String?,
-    @SerializedName("Ten")
+    @SerializedName("Ho")
     @Expose
     val lastName: String?,
     @SerializedName("photourl")
@@ -19,5 +19,8 @@ data class Comment(
     val photoUrl: String?,
     @SerializedName("noidung")
     @Expose
-    val content: String?
+    val content: String?,
+    @SerializedName("date")
+    @Expose
+    val date: String?
 )

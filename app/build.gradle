@@ -34,6 +34,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
@@ -62,4 +63,7 @@ dependencies {
 
     //permission
     implementation 'pub.devrel:easypermissions:3.0.0'
+
+    //admod
+    implementation 'com.google.android.gms:play-services-ads:18.3.0'
 }

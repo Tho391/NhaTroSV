@@ -1,105 +1,30 @@
 package com.example.android.nhatrosv.views.adapter
 
+import android.content.Context
 import android.net.Uri
-import android.os.Build
-import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.models.Apartment
+import com.example.android.nhatrosv.models.MainScreen
+import com.example.android.nhatrosv.utils.CharacterTransform.convertString
 import com.example.android.nhatrosv.utils.inflate
 import com.example.android.nhatrosv.utils.launchActivity
 import com.example.android.nhatrosv.views.activity.ApartmentDetailActivity
+import com.example.android.nhatrosv.views.activity.MainActivity
 import com.squareup.picasso.Picasso
-import java.util.*
 import kotlin.collections.ArrayList
 
 
-data class ApartmentAdapter(var mApartments: List<Apartment>) :
+data class ApartmentAdapter(val context: Context, var mApartments: List<Apartment>) :
     RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>(), Filterable {
 
     var filterApartments: List<Apartment>
 
     init {
         filterApartments = mApartments
-    }
-
-    companion object {
-        private val charA = charArrayOf(
-            'à', 'á', 'ạ', 'ả', 'ã',  // 0-&gt;16
-            'â', 'ầ', 'ấ', 'ậ', 'ẩ', 'ẫ', 'ă', 'ằ', 'ắ', 'ặ', 'ẳ', 'ẵ'
-        ) // a,// ă,// â
-
-        private val charE = charArrayOf(
-            'ê', 'ề', 'ế', 'ệ', 'ể', 'ễ',  // 17-&gt;27
-            'è', 'é', 'ẹ', 'ẻ', 'ẽ'
-        ) // e
-
-        private val charI = charArrayOf('ì', 'í', 'ị', 'ỉ', 'ĩ') // i 28-&gt;32
-
-        private val charO = charArrayOf(
-            'ò', 'ó', 'ọ', 'ỏ', 'õ',  // o 33-&gt;49
-            'ô', 'ồ', 'ố', 'ộ', 'ổ', 'ỗ',  // ô
-            'ơ', 'ờ', 'ớ', 'ợ', 'ở', 'ỡ'
-        ) // ơ
-
-        private val charU = charArrayOf(
-            'ù', 'ú', 'ụ', 'ủ', 'ũ',  // u 50-&gt;60
-            'ư', 'ừ', 'ứ', 'ự', 'ử', 'ữ'
-        ) // ư
-
-        private val charY = charArrayOf('ỳ', 'ý', 'ỵ', 'ỷ', 'ỹ') // y 61-&gt;65
-
-        private val charD = charArrayOf('đ', ' ') // 66-67
-
-        var charact = String(charA, 0, charA.size) +
-                String(charE, 0, charE.size) +
-                String(charI, 0, charI.size) +
-                String(charO, 0, charO.size) +
-                String(charU, 0, charU.size) +
-                String(charY, 0, charY.size) +
-                String(charD, 0, charD.size)
-    }
-
-    private fun getAlterChar(pC: Char): Char {
-        if (pC.toInt() == 32) {
-            return ' '
-        }
-
-        val tam = pC.toLowerCase() // Character.toLowerCase(pC);
-
-        var i = 0
-        while (i < charact.length && charact[i] != tam) {
-            i++
-        }
-
-//        if (i < 0 || i > 67)
-//            return pC
-
-        return when (i) {
-            in 0..16 -> 'a'
-            in 17..27 -> 'e'
-            in 28..32 -> 'i'
-            in 33..49 -> 'o'
-            in 50..60 -> 'u'
-            in 61..65 -> 'y'
-            66 -> 'd'
-            else -> pC
-        }
-    }
-
-    fun convertString(pStr: String): String {
-        var convertString = pStr.toLowerCase(Locale.getDefault())
-        for (i in convertString) {
-            if (i.toInt() !in 97..122) {
-                val tam1 = getAlterChar(i)
-                if (i.toInt() != 32)
-                    convertString = convertString.replace(i, tam1)
-            }
-        }
-        return convertString
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApartmentViewHolder {
@@ -118,22 +43,24 @@ data class ApartmentAdapter(var mApartments: List<Apartment>) :
         holder.tvName.text = apartment.name
         holder.tvDate.text = apartment.date
         holder.tvPrice.text = apartment.price.toString()
-        holder.tvAddress.text = apartment.street + " " + apartment.district
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.tvArea.text =
-                Html.fromHtml(apartment.area.toString() + " m<sup><small>2</small></sup>", 1)
-        } else
-            holder.tvArea.text = apartment.area.toString() + " m2"
+        holder.tvAddress.text = "${apartment.address} ${apartment.district}"
+
+        holder.tvArea.text = "${apartment.area.toString()} m\u00B2"
         Picasso.get()
             .load(Uri.parse(apartment.imageURl.toString()))
             .into(holder.imageView)
 
         holder.btnDetail.setOnClickListener {
             it.context.launchActivity<ApartmentDetailActivity> {
-                this.putExtra("apartment", apartment)
+                this.putExtra("apartmentId", apartment.id)
             }
         }
         holder.btnMap.setOnClickListener {
+            //this.putExtra()
+
+            if (context.javaClass == MainActivity::class.java) {
+                (context as MainActivity).scrollToScreen(MainScreen.MAP, apartment.id!!)
+            }
 
         }
     }
@@ -184,7 +111,7 @@ data class ApartmentAdapter(var mApartments: List<Apartment>) :
                             val address =
                                 convertString(
                                     row.district!!.toLowerCase() + " "
-                                            + row.street!!.toLowerCase()
+                                            + row.address!!.toLowerCase()
                                 )
                             val query = convertString(charString.toLowerCase())
                             if (address.contains(query)) {

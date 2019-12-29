@@ -30,7 +30,7 @@ data class CommentAdapter(var mComments: List<Comment>) :
 
         holder.textViewName.text = "${comment.firstName} ${comment.lastName}"
         holder.textViewContent.text = comment.content
-
+        holder.textViewDate.text = comment.date
         Picasso.get()
             .load(Uri.parse(comment.photoUrl))
             .transform(CircleTransform())
@@ -48,6 +48,7 @@ data class CommentAdapter(var mComments: List<Comment>) :
         val imageViewAvatar: ImageView = view.findViewById(R.id.imageView_avatar)
         val textViewName: TextView = view.findViewById(R.id.textView_name)
         val textViewContent: TextView = view.findViewById(R.id.textView_content)
+        val textViewDate: TextView = view.findViewById(R.id.textView_date)
     }
 
 }

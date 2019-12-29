@@ -17,9 +17,10 @@ import com.example.android.nhatrosv.models.User
 import com.example.android.nhatrosv.views.activity.LoginActivity
 import com.example.android.nhatrosv.utils.TOAST
 import com.example.android.nhatrosv.utils.launchActivity
+import com.example.android.nhatrosv.views.activity.OnDataReceivedListener
 import com.squareup.picasso.Picasso
 
-class ProfileFragment : Fragment(), View.OnClickListener {
+class ProfileFragment : Fragment(), View.OnClickListener, OnDataReceivedListener {
 
 
     lateinit var linearLayout: LinearLayout
@@ -48,7 +49,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 .load(Uri.parse(user.photoUrl))
                 .transform(CircleTransform())
                 .into(imageViewProfile)
-            TOAST("email nè: ${user.email}", Toast.LENGTH_LONG)
+            //TOAST("email nè: ${user.email}", Toast.LENGTH_LONG)
         }
 
         return rootView
@@ -67,6 +68,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         TOAST("log out", Toast.LENGTH_SHORT)
         activity?.finish()
         GoogleSignInClientHelper.signOut()
+    }
+
+    override fun onDataReceived(apartmentId: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

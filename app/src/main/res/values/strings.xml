@@ -8,7 +8,10 @@
     <string name="activity_main_bottom_direction">Chỉ đường</string>
     <string name="activity_main_bottom_share">Chia sẻ</string>
     <string name="dien_tich_phong">Diện tích phòng (m\u00B2)</string>
+    <string name="register">Bạn chưa có tài khoản? <b>Đăng kí ngay</b></string>
 
-
-
+    <string name="test">sdfsdfhsdfksdhfsjkdfhksjdhsdffffffffffffffffffffffffff
+    sdklfsdfjsldfjsd
+    sdkfjsldkfjsdlkf
+    klsdjfffffffffffffffffffffffffffffffffffffffffffffffffff</string>
 </resources>
