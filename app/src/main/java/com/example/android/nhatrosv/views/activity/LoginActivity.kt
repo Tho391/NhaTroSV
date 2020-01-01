@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,9 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.api.GoogleSignInClientHelper
-import com.example.android.nhatrosv.models.Token
+import com.example.android.nhatrosv.models.Response
 import com.example.android.nhatrosv.models.User
 import com.example.android.nhatrosv.utils.TOAST
+import com.example.android.nhatrosv.utils.get
 import com.example.android.nhatrosv.utils.launchActivity
 import com.example.android.nhatrosv.utils.put
 import com.example.android.nhatrosv.viewModels.LoginActivityViewModel
@@ -55,6 +57,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
         )
     private val rationale = "We need to access your location & phone"
     private lateinit var mInterstitialAd: InterstitialAd
+
+    lateinit var sharedPreferences:SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,9 +106,18 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
         // [START on_start_sign_in]
 // Check for existing Google Sign In account, if the user is already signed in
 // the GoogleSignInAccount will be non-null.
+        sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        val token = sharedPreferences.get("token", "null")
+
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        if (account != null) {
-            updateUI(account)
+        if (token != "null") {
+            if (account != null) {
+                updateUI(account)
+            } else {
+                updateUI()
+            }
+        } else {
+            //k có token thì k auto login
         }
         // [END on_start_sign_in]
     }
@@ -130,9 +143,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
 
     }
 
-    private fun saveToken(token: Token) {
-        val sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
-        sharedPreferences.put("token", token.accessToken)
+    private fun saveToken(response: Response) {
+         sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        sharedPreferences.put("token", response.accessToken)
     }
 
     private fun updateUI() {
@@ -147,19 +160,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
 
         val id = account.id
         val textViewToken: TextView = findViewById(R.id.editText)
+        val idToken = account.idToken
         textViewToken.text = account.idToken
         val displayName = account.displayName
         val email = account.email
         val photoUrl = account.photoUrl.toString()
-        user = User(id, displayName, email, null, photoUrl, null, null)
+        user = User(id, idToken, displayName, email, null, photoUrl, null,null)
 
         val viewModel = LoginActivityViewModel()
-        viewModel.login(user)
+        viewModel.login(user).observe(this, Observer {
+            if (it != null) {
+                saveToken(it)
+                launchActivity<MainActivity> {
+                    this.putExtra("account", user)
+                }
+                finish()
+            }
+        })
 
-        launchActivity<MainActivity> {
-            this.putExtra("account", user)
-        }
-        finish()
+
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
@@ -168,9 +187,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
                 completedTask.getResult(ApiException::class.java)
             // Signed in successfully, show authenticated UI.
             //updateUI(account)
-            if (account != null)
+            if (account != null) {
                 updateUI(account)
-
+//                val viewModel = LoginActivityViewModel()
+//                viewModel.login(user)
+            }
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.

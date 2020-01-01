@@ -24,10 +24,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
         android:textSize="36sp"
-        android:text="Tên" />
+        android:text="Hello User" />
 
     <LinearLayout
-        android:id="@+id/linear2"
+        android:id="@+id/linear_changePass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linear3"
+        android:id="@+id/linear_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

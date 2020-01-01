@@ -26,14 +26,15 @@ class Repository {
                     data.value = result
                 },
                 { error ->
-                    Log.e("ERROR", error.message!!) }
+                    Log.e("ERROR", error.message!!)
+                }
             )
         return data
     }
 
-    fun getComment(token: String,idNhaTro: Int): MutableLiveData<List<Comment>> {
+    fun getComment(token: String, idNhaTro: Int): MutableLiveData<List<Comment>> {
         val data: MutableLiveData<List<Comment>> = MutableLiveData()
-        apartmentsServiceClient.getComments(token,idNhaTro)
+        apartmentsServiceClient.getComments(token, idNhaTro)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -51,11 +52,16 @@ class Repository {
         return data
     }
 
-    fun sendComment(token: String,apartmentId: Int, userId: Int, content: String): MutableLiveData<ResponseAddComment> {
+    fun sendComment(
+        token: String,
+        apartmentId: Int,
+        userId: Int,
+        content: String
+    ): MutableLiveData<ResponseAddComment> {
         val data: MutableLiveData<ResponseAddComment> = MutableLiveData()
         val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.US)
         val date = sdf.format(Date())
-        apartmentsServiceClient.sendComment(token,apartmentId, userId, content, date)
+        apartmentsServiceClient.sendComment(token, apartmentId, userId, content, date)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -69,9 +75,9 @@ class Repository {
         return data
     }
 
-    fun getApartment(token: String,id: Int): MutableLiveData<Apartment> {
+    fun getApartment(token: String, id: Int): MutableLiveData<Apartment> {
         val data: MutableLiveData<Apartment> = MutableLiveData()
-        apartmentsServiceClient.getApartment(token,id)
+        apartmentsServiceClient.getApartment(token, id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -86,37 +92,80 @@ class Repository {
         return data
     }
 
-    fun login(username: String, password: String): MutableLiveData<Token> {
-        val data: MutableLiveData<Token> = MutableLiveData()
-        apartmentsServiceClient.login(username,password)
+    fun login(username: String, password: String): MutableLiveData<Response> {
+        val data: MutableLiveData<Response> = MutableLiveData()
+        apartmentsServiceClient.login(username, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {result ->
+                { result ->
                     data.value = result
                 },
-                {
-                    error ->
+                { error ->
                     Log.e("lỗi", error.message)
                 }
             )
         return data
     }
 
-    fun login(user: User): MutableLiveData<Token> {
-        val data: MutableLiveData<Token> = MutableLiveData()
-        apartmentsServiceClient.login(user.id!!,user.name!!,user.email!!,user.photoUrl!!)
+    fun login(user: User): MutableLiveData<Response> {
+        val data: MutableLiveData<Response> = MutableLiveData()
+        val array = user.name!!.split(" ")
+        val firstName = array[0]
+        val lastName = user.name!!.drop(firstName.length + 1)
+        apartmentsServiceClient.login(
+            user.id!!,
+            user.idToken!!,
+            lastName,
+            firstName,
+            user.email!!,
+            user.photoUrl!!
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {result ->
+                { result ->
                     data.value = result
                 },
-                {
-                        error ->
+                { error ->
                     Log.e("lỗi", error.message)
                 }
             )
+        return data
+    }
+
+    fun register(
+        username: String,
+        password: String,
+        ho: String,
+        ten: String,
+        ngaySinh: String,
+        diaChi: String,
+        sdt: String,
+        photourl: String
+    ): MutableLiveData<Response> {
+        val data: MutableLiveData<Response> = MutableLiveData()
+        apartmentsServiceClient.register(
+            username,
+            password,
+            ho,
+            ten,
+            ngaySinh,
+            diaChi,
+            sdt,
+            photourl
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    data.value = result
+                },
+                { error ->
+                    Log.e("lỗi", error.message)
+                }
+            )
+
         return data
     }
 }

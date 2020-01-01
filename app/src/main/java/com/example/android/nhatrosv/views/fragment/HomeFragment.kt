@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.models.Apartment
-import com.example.android.nhatrosv.models.Token
+import com.example.android.nhatrosv.models.Response
 import com.example.android.nhatrosv.utils.get
 import com.example.android.nhatrosv.utils.getViewModel
 import com.example.android.nhatrosv.viewModels.MainActivityViewModel
@@ -36,8 +36,8 @@ class HomeFragment : Fragment(), OnDataReceivedListener {
     lateinit var viewModel: MainActivityViewModel
     var mApartments: List<Apartment> = ArrayList()
 
-    lateinit var sharedPreferences : SharedPreferences
-    lateinit var token: Token
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var response: Response
 
     lateinit var mSearch: MenuItem
     lateinit var mSearchView: SearchView
@@ -52,13 +52,16 @@ class HomeFragment : Fragment(), OnDataReceivedListener {
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         if (activity is AppCompatActivity)
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar.title = "Nhà trọ"
 
-        sharedPreferences = requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
-        token= Token(sharedPreferences.get("token","null"))
+        sharedPreferences =
+            requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+
+        response = Response(sharedPreferences.get("token", "null"), null)
         viewModel = getViewModel<MainActivityViewModel>()
         recyclerView = rootView.findViewById(R.id.recycler_view)
 
-        mApartmentAdapter = ApartmentAdapter(requireContext(),ArrayList())
+        mApartmentAdapter = ApartmentAdapter(requireContext(), ArrayList())
         recyclerView.adapter = mApartmentAdapter
 
         val linearLayoutManager =
@@ -66,11 +69,11 @@ class HomeFragment : Fragment(), OnDataReceivedListener {
         recyclerView.layoutManager = linearLayoutManager
 
         //loadApartments()
-        loadApartment(token.getToken())
+        loadApartment(response.getToken())
 
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
-            loadApartment(token.getToken())
+            loadApartment(response.getToken())
         }
 
         return rootView
@@ -95,6 +98,7 @@ class HomeFragment : Fragment(), OnDataReceivedListener {
         inflater.inflate(R.menu.search_menu, menu)
         //super.onCreateOptionsMenu(menu, inflater)
 
+
         mSearch = menu.findItem(R.id.action_search)
         mSearchView = mSearch.actionView as SearchView
 
@@ -118,23 +122,23 @@ class HomeFragment : Fragment(), OnDataReceivedListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when (item.itemId){
-            R.id.action_filter ->{
+        return when (item.itemId) {
+            R.id.action_filter -> {
                 val fm = fragmentManager
                 val dialogFragment = FilterDialogFragment()
                 if (fm != null) {
-                    dialogFragment.setTargetFragment(this,RC_HOME)
-                    dialogFragment.show(fm,"filter")
+                    dialogFragment.setTargetFragment(this, RC_HOME)
+                    dialogFragment.show(fm, "filter")
                 }
                 true
             }
-            R.id.action_search ->{
-                Log.i("menu click","search icon click")
+            R.id.action_search -> {
+                Log.i("menu click", "search icon click")
                 true
             }
-            R.id.action_refresh ->{
+            R.id.action_refresh -> {
                 swipeRefreshLayout.isRefreshing = true
-                loadApartment(token.getToken())
+                loadApartment(response.getToken())
                 true
             }
 
@@ -148,12 +152,12 @@ class HomeFragment : Fragment(), OnDataReceivedListener {
         when (requestCode) {
             RC_HOME -> {
                 val district = data?.getStringExtra("district")
-                val area = data?.getIntExtra("area",-1)
-                val price = data?.getFloatExtra("price",-1F)
+                val area = data?.getIntExtra("area", -1)
+                val price = data?.getFloatExtra("price", -1F)
 
-                mApartmentAdapter.updateApartments(district,area,price)
+                mApartmentAdapter.updateApartments(district, area, price)
             }
-            RC_CANCEL ->{
+            RC_CANCEL -> {
                 //loadApartment()
                 //clear filter
                 mApartmentAdapter.filter.filter(mSearchView.query)

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.models.MainScreen
-import com.example.android.nhatrosv.models.Token
+import com.example.android.nhatrosv.models.Response
 import com.example.android.nhatrosv.models.getMainScreenForMenuItem
 import com.example.android.nhatrosv.utils.get
 import com.example.android.nhatrosv.views.adapter.MainPagerAdapter
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     lateinit var mDataReceivedListener: OnDataReceivedListener
 
     private lateinit var sharedPreferences: SharedPreferences
-    lateinit var token: Token
+    lateinit var response: Response
     override fun onDataReceived(apartmentId: Int) {
         mainPagerAdapter.onDataReceived(apartmentId)
     }
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
-        token= Token(sharedPreferences.get("token","null"))
+        response= Response(sharedPreferences.get("token","null"),null)
         // Initialize components/views.
         viewPager = findViewById(R.id.view_pager)
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)

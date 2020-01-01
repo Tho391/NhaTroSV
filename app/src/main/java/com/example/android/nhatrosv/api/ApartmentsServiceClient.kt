@@ -3,7 +3,7 @@ package com.example.android.nhatrosv.api
 import com.example.android.nhatrosv.models.Apartment
 import com.example.android.nhatrosv.models.Comment
 import com.example.android.nhatrosv.models.ResponseAddComment
-import com.example.android.nhatrosv.models.Token
+import com.example.android.nhatrosv.models.Response
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -54,16 +54,31 @@ interface ApartmentsServiceClient {
     fun login(
         @Field("Username") username: String,
         @Field("Password") password: String
-    ): Observable<Token>
+    ): Observable<Response>
 
     @FormUrlEncoded
-    @POST("api/loginuser")
+    @POST("api/Logingoogle")
     fun login(
         @Field("id") id: String,
-        @Field("name") name: String,
+        @Field("idtoken") idtoken: String,
+        @Field("Ho") LastName: String,
+        @Field("Ten") FirstName: String,
         @Field("gmail") email: String,
         @Field("photourl") photoUrl: String
-    ): Observable<Token>
+    ): Observable<Response>
+
+    @FormUrlEncoded
+    @POST("api/Dangky")
+    fun register(
+        @Field("Username") username: String,
+        @Field("Password") password: String,
+        @Field("Ho") ho: String,
+        @Field("Ten") ten: String,
+        @Field("NgaySinh") ngaySinh: String,
+        @Field("DiaChi") diaChi: String,
+        @Field("sodt") sdt: String,
+        @Field("photourl") photourl: String
+    ): Observable<Response>
 
     companion object {
         fun create(): ApartmentsServiceClient {
