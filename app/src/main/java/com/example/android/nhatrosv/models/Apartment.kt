@@ -43,11 +43,7 @@ data class Apartment(
     val localY: Double?,
     @SerializedName("chitiet")
     @Expose
-    val details: String?,
-    @SerializedName("state")
-    @Expose
-    val state: Any?
-
+    val details: String?
 ) : Serializable {
 
     fun getInfo(): String {

@@ -246,3 +246,10 @@ inline fun <reified T> SharedPreferences.put(key: String, value: T): T {
     editor.commit()
     return value
 }
+
+fun SharedPreferences.clear() {
+    val editor = this.edit()
+    editor.clear()
+    editor.apply()
+
+}

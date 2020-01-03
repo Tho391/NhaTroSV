@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.models.Apartment
-import com.example.android.nhatrosv.models.Token
+import com.example.android.nhatrosv.models.Response
 import com.example.android.nhatrosv.utils.CharacterTransform.convertString
 import com.example.android.nhatrosv.utils.TOAST
 import com.example.android.nhatrosv.utils.get
@@ -69,7 +69,7 @@ class MapFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     lateinit var sharedPreferences: SharedPreferences
-    lateinit var token: Token
+    lateinit var response: Response
 
     lateinit var markerInfoWindowAdapter: MarkerInfoWindowAdapter
 
@@ -90,7 +90,7 @@ class MapFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
 //                //Log.e("nhà trọ",response.toString())
 //            })
         sharedPreferences = requireContext().getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
-        token= Token(sharedPreferences.get("token","null"))
+        response= Response(sharedPreferences.get("token","null"),null)
 
         mFusedLocationClient =
             LocationServices.getFusedLocationProviderClient(activity!!.baseContext)
@@ -161,7 +161,7 @@ class MapFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener,
 
     private fun addMarker() {
         val viewModel = getViewModel<MainActivityViewModel>()
-        viewModel.getApartments(token.getToken()).observe(this,
+        viewModel.getApartments(response.getToken()).observe(this,
             Observer { response ->
 
                 mApartments = response

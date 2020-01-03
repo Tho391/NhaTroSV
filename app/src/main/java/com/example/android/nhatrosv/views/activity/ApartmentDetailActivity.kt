@@ -23,7 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android.nhatrosv.R
 import com.example.android.nhatrosv.models.Apartment
 import com.example.android.nhatrosv.models.Comment
-import com.example.android.nhatrosv.models.Token
+import com.example.android.nhatrosv.models.Response
 import com.example.android.nhatrosv.utils.*
 import com.example.android.nhatrosv.viewModels.MainActivityViewModel
 import com.example.android.nhatrosv.views.adapter.CommentAdapter
@@ -54,13 +54,13 @@ class ApartmentDetailActivity : AppCompatActivity() {
     private lateinit var mInterstitialAd: InterstitialAd
 
     private lateinit var sharedPreferences: SharedPreferences
-    lateinit var token: Token
+    lateinit var response: Response
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_apartment_detail)
         sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
-        token = Token(sharedPreferences.get("token", "null"))
+        response = Response(sharedPreferences.get("token", "null"),null)
 
         toolbar = findViewById(R.id.toolbar2)
         imageView = findViewById(R.id.imageView)
@@ -88,7 +88,7 @@ class ApartmentDetailActivity : AppCompatActivity() {
         editTextComment.onRightDrawableClicked {
             val userId = 1
             val content = it.text.toString()
-            sendComment(token.getToken(), apartmentId, userId, content)
+            sendComment(response.getToken(), apartmentId, userId, content)
             TOAST("sent", Toast.LENGTH_LONG)
             it.text.clear()
         }
@@ -147,7 +147,7 @@ class ApartmentDetailActivity : AppCompatActivity() {
         swipeRefreshLayout.isRefreshing = true
         apartmentId = intent.getIntExtra("apartmentId", 0)
         if (apartmentId != 0) {
-            getApartment(token.getToken(), apartmentId)
+            getApartment(response.getToken(), apartmentId)
         }
 
         //swipeRefreshLayout.isRefreshing = false
